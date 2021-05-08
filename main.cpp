@@ -75,6 +75,7 @@ namespace my_vector {
             ~vector() {
                 std::destroy_n(reinterpret_cast<T*>(buffer_), size_);
                 delete [] buffer_;
+                std::cout << 5;
             }
 
             T& front() {
@@ -198,6 +199,23 @@ namespace my_vector {
                     capacity_ = size_ * 2;
                 }
                 new (reinterpret_cast<T*>(buffer_) + size_) T(argument);
+                size_++;
+            }
+
+            template <typename... Args>
+            void emplace_back(Args&&... args) {
+                if (size_ == capacity_) {
+                    char* new_buffer_ = new char[size_* sizeof(T) * 2];
+                    std::uninitialized_move(reinterpret_cast<T*>(buffer_),
+                                            reinterpret_cast<T*>(buffer_) + size_,
+                                            reinterpret_cast<T*>(new_buffer_));
+                    std::destroy_n(reinterpret_cast<T*>(buffer_), size_);
+                    delete [] buffer_;
+                    buffer_ = new_buffer_;
+                    capacity_ = size_ * 2;
+                }
+                new (reinterpret_cast<T*>(buffer_) + size_)
+                T(std::forward<Args>(args)...);
                 size_++;
             }
 
@@ -386,8 +404,5 @@ namespace my_vector {
 }
 
 int main() {
-    my_vector::vector<int> a{1, 2, 3};
-    auto p = a.rbegin();
-    p--;
-    std::cout << *p;
+
 }
