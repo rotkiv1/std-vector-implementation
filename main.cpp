@@ -114,12 +114,35 @@ namespace my_vector {
                 return std::launder(reinterpret_cast<T*>(buffer_));
             }
 
+            T* rbegin() {
+                return std::launder(reinterpret_cast<T*>(buffer_) + size_);
+            }
+
+            const T* rbegin() const {
+                return std::launder(reinterpret_cast<T*>(buffer_) + size_);
+            }
+
             T* end() {
                 return std::launder(reinterpret_cast<T*>(buffer_) + size_);
             }
 
             const T* end() const {
                 return std::launder(reinterpret_cast<T*>(buffer_) + size_);
+            }
+
+            T* rend() {
+                return std::launder(reinterpret_cast<T*>(buffer_));
+            }
+
+            const T* rend() const {
+                return std::launder(reinterpret_cast<T*>(buffer_));
+            }
+
+            T* data() {
+                if (size_ == 0) {
+                    return nullptr;
+                }
+                return std::launder(reinterpret_cast<T*>(buffer_));
             }
 
             void clear() {
@@ -360,4 +383,11 @@ namespace my_vector {
                 return size_ >= second.size_;
             }
     };
+}
+
+int main() {
+    my_vector::vector<int> a{1, 2, 3};
+    auto p = a.rbegin();
+    p--;
+    std::cout << *p;
 }
