@@ -75,7 +75,6 @@ namespace my_vector {
             ~vector() {
                 std::destroy_n(reinterpret_cast<T*>(buffer_), size_);
                 delete [] buffer_;
-                std::cout << 5;
             }
 
             T& front() {
