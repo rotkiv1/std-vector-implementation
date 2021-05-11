@@ -68,6 +68,8 @@ namespace my_vector {
 
             std::size_t size();
             const std::size_t size() const;
+            std::size_t maxsize();
+            const std::size_t max_size() const;
 
             void push_back(T&& argument);
             void push_back(T& argument);
