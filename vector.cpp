@@ -143,6 +143,16 @@ const T* my_vector::vector<T>::rend() const {
 }
 
 template <typename T>
+std::size_t my_vector::vector<T>::max_size() {
+    return capacity_;
+}
+
+template <typename T>
+const std::size_t my_vector::vector<T>::max_size() const {
+    return capacity_;
+}
+
+template <typename T>
 T* my_vector::vector<T>::data() {
     if (size_ == 0) {
         return nullptr;
