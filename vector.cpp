@@ -13,8 +13,7 @@ my_vector::vector<T>::vector(std::initializer_list<T> set)
 }
 
 template <typename T>
-my_vector::vector<T>::vector(std::size_t n,
-                             const T& default_value = T())
+my_vector::vector<T>::vector(std::size_t n, const T& default_value)
 : size_(n), capacity_(n), buffer_(new char[sizeof(T) * n]) {
     std::uninitialized_fill_n(reinterpret_cast<T*>(buffer_), n,
                               default_value);
