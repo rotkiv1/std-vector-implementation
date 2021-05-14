@@ -2,6 +2,12 @@
 A custom vector implementation using placement new similar to STL std::vector
 
  
+# Private class variables
+    char* buffer_;
+    std::size_t size_;
+    int capacity_;
+    typedef T* iterator;
+
 
 
 # Implemented methods
